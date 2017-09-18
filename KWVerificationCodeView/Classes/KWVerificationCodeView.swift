@@ -147,11 +147,29 @@ public protocol KWVerificationCodeViewDelegate: class {
     
     return true
   }
+
+    public func setColorsImmediately(borderColor: UIColor?, backgroundColor: UIColor?, fontColor: UIColor?) {
+        for textFieldView in textFieldViews {
+            if let borderColor = borderColor {
+                textFieldView.layer.borderColor = borderColor.cgColor
+            }
+            if let backgroundColor = backgroundColor {
+                textFieldView.backgroundColor = backgroundColor
+            }
+            if let fontColor = fontColor {
+                textFieldView.textColor = fontColor
+            }
+        }
+    }
   
   // MARK: - Private Methods
   private func setupVerificationCodeViews() {
     for textFieldView in textFieldViews {
       textFieldView.delegate = self
+        textFieldView.layer.borderWidth = 1
+        textFieldView.layer.borderColor = UIColor.lightGray.cgColor
+        textFieldView.layer.cornerRadius = 8
+        textFieldView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
     }
     
     textFieldViews.first?.activate()
@@ -169,7 +187,9 @@ extension KWVerificationCodeView: KWTextFieldDelegate {
     if textFieldViews.last == textFieldView && oldCode != " " {
       return
     }
-    
+    textFieldView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+    textFieldView.layer.borderColor = UIColor.lightGray.cgColor
+
     if textFieldView.code == " " {
       let validIndex = textFieldViews.index(of: textFieldView)! == 0 ? 0 : textFieldViews.index(of: textFieldView)! - 1
       textFieldViews[validIndex].activate()

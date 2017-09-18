@@ -106,6 +106,8 @@ protocol KWTextFieldDelegate: class {
     if numberTextField.text?.characters.count == 0 {
       numberTextField.text = " "
     }
+    self.layer.borderColor = UIColor.black.cgColor
+    self.backgroundColor = UIColor.white
   }
   
   public func deactivate() {
