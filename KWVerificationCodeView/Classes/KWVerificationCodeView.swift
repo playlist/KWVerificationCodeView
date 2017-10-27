@@ -174,6 +174,10 @@ public protocol KWVerificationCodeViewDelegate: class {
     
     textFieldViews.first?.activate()
   }
+  fileprivate var currentIndex = 0
+  public func activateCurrentEntry() {
+    self.textFieldViews[self.currentIndex].activate()
+  }
 }
 
 // MARK: - KWTextFieldDelegate
